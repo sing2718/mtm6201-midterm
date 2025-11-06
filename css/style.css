@@ -1,0 +1,661 @@
+/* FILE: style.css
+    DESCRIPTION: styles for the MTM6201 Midterm Project - Prototype (index.html, page2.html, page3.html). 
+                 Aims for full responsiveness, accessibility, and includes 
+                 the two required animations (pulse and transition).
+*/
+
+/* --- Global Styles & Variables --- */
+/* color palette and fonts */
+:root {
+    --color-primary: #52a16d; /* Main accent green */
+    --color-primary-dark: #438e5d;
+    
+    /* Mockup related Colors */
+    --color-dark-header: #213532; /* Deep dark green/black for header and footer */
+    --color-logo: #c8e6a1; /* Light yellow-green for the logo and active links */
+    --color-secondary-bg: #f5fdeb; /* Very light green/off-white background for hero/cards */
+    --color-card-bg: #f5fdeb; /* Used for the feature cards */
+    --color-dark-footer-line: #374a47; /* Darker line color for footer separation */
+
+    /* Typography Colors */
+    --color-text-dark: #2c2c2c; /* headings */
+    --color-text-body: #5a5a5a; /* body text */
+    --color-link-light: #fff; /* links on dark backgrounds */
+    --color-white: #fff;
+
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+}
+
+/* for stable, predictable layouts */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-text-body);
+    margin: 0;
+    line-height: 1.6;
+    background-color: var(--color-secondary-bg);
+}
+
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    color: var(--color-text-dark);
+    line-height: 1.2;
+}
+
+/* Fluid heading size for responsiveness */
+h2 {
+    font-size: clamp(2rem, 5vw, 2.8rem); 
+    font-weight: 700;
+    margin-top: 0;
+}
+
+/* --- ACCESSIBILITY: Skip Link Styling --- */
+/* Why: Mandatory accessibility requirement for keyboard navigation. */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 8px;
+    z-index: 1000;
+    transition: top 0.3s;
+}
+.skip-link:focus {
+    top:0;
+}
+
+/* --- HEADER & NAVIGATION --- */
+/* Why: Uses Flexbox for logo on left and menu on right. */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: var(--color-dark-header); 
+    height: auto;
+    flex-direction: column;
+}
+
+.logo-container {
+    flex-shrink: 0; /* Prevents logo from shrinking on small screens */
+    margin-bottom: 10px;
+}
+
+.main-nav ul {
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    display: flex; /* Ensures links are always visible */
+    flex-direction: column; /* Links stack vertically on mobile */
+    text-align: center;
+    gap: 10px;
+}
+
+
+/* --- ANIMATION 1: LOGO PULSE (REQUIRED 'animation' PROPERTY) --- */
+@keyframes pulse {
+    0%, 100% { opacity: 0.95; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.10); }
+}
+
+.logo-animate {
+    color: var(--color-logo);
+    font-size: 1.5rem;
+    font-weight: 700;
+    animation: pulse 4s infinite ease-in-out; 
+}
+
+/* --- NAVIGATION LINKS --- */
+.main-nav li a {
+    color: var(--color-link-light);
+    transition: color 0.3s ease;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.main-nav li a:hover, .main-nav li a[aria-current="page"] {
+    color: var(--color-logo); 
+    font-weight: 600;
+}
+
+/* --- BUTTON STYLES  --- */
+.btn-primary, .btn-secondary {
+    display: inline-block;
+    padding: 12px 25px; 
+    text-decoration: none;
+    border-radius: 25px; 
+    font-weight: 600;
+    text-align: center;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+/* button primary style (Get Started) */
+.btn-primary {
+    background-color: var(--color-logo); 
+    color: var(--color-text-dark);
+    border: 2px solid var(--color-logo);
+}
+
+.btn-secondary {
+    background-color: var(--color-white);
+    color: var(--color-text-dark);
+    border: 2px solid #ccc;
+}
+
+/* --- ANIMATION 2: Hover Transition (REQUIRED 'transition' property) --- */
+/* Enhances UX and fulfills the assignment requirement. */
+.btn-primary:hover {
+    background-color: var(--color-primary); 
+    color: var(--color-white);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px); /* lift effect */
+    border-color: var(--color-primary);
+}
+
+.btn-secondary:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.main-nav li a.btn-primary {
+    color: var(--color-dark-text); 
+}
+.main-nav li a.btn-primary:hover {
+    
+    color: var(--color-white); 
+    background-color: var(--color-primary); 
+}
+
+/* --- HERO SECTION LAYOUT (MOBILE-FIRST DESIGN) --- */
+/*  Flex-direction column stacks content for mobile. */
+.hero-section {
+    padding: 40px 5%;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    background-color: var(--color-secondary-bg); 
+    min-height: 80vh; 
+}
+
+.hero-visual, .hero-content {
+    background-color: var(--color-secondary-bg); 
+    padding: 30px;
+    width: 100%;
+}
+
+.hero-visual {
+    order: 1;
+    min-height: 350px;
+    max-width: 500px;
+    margin-bottom: 20px;
+    
+    
+    border-radius: 0 0 0 50px; 
+    overflow: hidden;
+
+    /* Responsive Image 1: Mobile/Small Screen Image */
+    background-image: url('../images/hero-small.jpg'); 
+    background-size: cover; 
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.hero-content {
+    order: 2; 
+    text-align: justify;
+    max-width: 650px;
+    margin-top: -30px; /* Overlap the visual block slightly */
+    padding-top: 50px;
+    border-radius: 50px 0 0 0; 
+}
+
+.sub-headline {
+    color: var(--color-text-dark);
+    font-weight: 500;
+    display: inline-block; /* Allows the container to wrap around the content */
+    margin-bottom: 5px;
+    position: relative; /* Allows the ::after element to be positioned relative to this span */
+    padding-bottom: 8px; /* Adds space for the underline */
+}
+
+.sub-headline::after {
+    content: ''; /* for pseudo-elements */
+    display: block;
+    width: 100%; /* Line is as wide as the text above it */
+    height: 3px;
+    background-color: var(--color-logo); 
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 2px; 
+}
+.heart-icon {
+    color: #ff4757;
+}
+.subtitle {
+    font-size: 1rem;
+    color: var(--color-text-body);
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+
+/* --- FEATURES SECTION --- */
+.features-section {
+    padding: 80px 5%;
+    text-align: center;
+    background-color: var(--color-white); 
+}
+
+.features-intro {
+    font-size: 1.1rem;
+    margin-bottom: 50px;
+}
+
+.feature-grid {
+    display: flex;
+    flex-direction: column; 
+    gap: 25px;
+    align-items: center; /* Center cards before they go into two columns */
+}
+
+.feature-card {
+    padding: 30px;
+    background-color: var(--color-card-bg); 
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); 
+    text-align: left;
+    max-width: 550px;
+}
+
+.feature-card h3 {
+    color: var(--color-text-dark);
+    margin-top: 0;
+    font-size: 1.2rem;
+    display: inline-block;
+    margin-left: 10px;
+}
+.icon-placeholder {
+    display: inline-block;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    background-color: var(--color-link-light);
+    padding: 8px 12px;
+    border-radius: 8px;
+    float: left;
+}
+
+/* --- FOOTER  --- */
+.main-footer {
+    background-color: var(--color-dark-header);
+    color: var(--color-link-light);
+    padding: 30px 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 0.9rem;
+}
+
+.footer-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid var(--color-dark-footer-line);
+    padding-bottom: 20px;
+}
+
+.logo-footer {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-logo);
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+.footer-links a {
+    color: var(--color-link-light);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.footer-links a:hover {
+    color: var(--color-logo);
+}
+
+.go-to-top {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    background-color: var(--color-dark-footer-line);
+    padding: 10px;
+    
+    border-radius: 5px;
+}
+
+.copyright {
+    margin: 10px 0 0 0;
+    color: #aaa;
+}
+
+
+
+/* --- MEDIA QUERIES (RESPONSIVENESS) --- */
+
+@media screen and (min-width: 650px) {
+    /* Revert header to horizontal layout */
+    .main-header {
+        flex-direction: row;
+        justify-content: space-between;
+        height: 70px;
+    }
+    .logo-container {
+        margin-bottom: 0;
+    }
+
+   
+    .main-nav ul {
+        flex-direction: row; /* Links line up horizontally */
+        text-align: left;
+        gap: 25px;
+    }
+    
+}
+
+@media screen and (min-width: 768px) {
+    /* Navigation: Show links inline */
+    .main-nav ul {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+    }
+    
+    /* Footer Top: Horizontal layout */
+    .footer-top {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Feature Grid: Switch to a 2-column layout for features */
+    .feature-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+    
+    .feature-card {
+        max-width: none;
+    }
+    
+    .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .contact-item {
+        flex: 1;
+        margin-right: 10px;
+        text-align: left;
+    }
+    .copyright {
+        margin: 0;
+        flex-shrink: 0;
+    }
+}
+
+
+@media screen and (min-width: 1024px) {
+    .main-header, .main-footer {
+        padding: 15px 10%;
+    }
+    
+    /* Hero Section: Switch to the desired two-column grid layout */
+    .hero-section {
+        display: grid;
+        grid-template-columns: 1fr 1.4fr; /* Image wider than content, matching mockup */
+        gap: 0;
+        padding: 0; 
+        text-align: left;
+        align-items: stretch;
+    }
+
+    /* Image Block */
+    .hero-visual {
+        order: unset; 
+        min-height: 100%;
+        max-width: none;
+        margin-bottom: 0;
+        /* Responsive Image 2: Desktop/Large Screen Image */
+        background-image: url('../images/hero-large.jpg'); 
+        border-radius: 0 50px 50px 0; /* Curve is on the right side now */
+    }
+    
+    /* Content Block */
+    .hero-content {
+        order: unset; 
+        align-self: center; /* Vertically centers the text */
+        max-width: none;
+        padding: 0 10% 0 50px; /* Padding for the text content */
+        margin-top: 0;
+        border-radius: 0;
+    }
+    
+    .hero-actions {
+        justify-content: flex-start; /* Align buttons left to match text */
+    }
+    
+    .customer-info {
+        text-align: left;
+    }
+}
+
+
+/* --- PROCESS PAGE STYLING (page2.html) --- */
+
+
+/* Why: Centers the main heading and subheading for the process page introduction. */
+.process-intro {
+    padding: 60px 5%;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.process-intro h2 {
+    font-size: 2.2rem;
+    margin-bottom: 5px;
+}
+
+/* --- 10-Step Process Grid --- */
+/* Why: Uses CSS Grid for a 2-column layout on medium screens and up */
+.process-steps {
+    padding: 0 5%;
+    display: grid;
+    /* On mobile, stack vertically */
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.step-card {
+    display: flex; /* Uses Flexbox to align number and content */
+    gap: 20px;
+    padding: 30px;
+    background-color: var(--color-white);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    align-items: flex-start;
+}
+
+/* Styling for the large, numbered step indicator */
+.step-number {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary); 
+    flex-shrink: 0; /* Prevents the number from shrinking */
+    line-height: 1;
+}
+
+.step-content h3 {
+    font-size: 1.2rem;
+    margin: 0 0 5px 0;
+    color: var(--color-text-dark);
+}
+
+.step-content p {
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+
+.process-banner {
+    background-color: var(--color-link-light);
+    padding: 50px 5%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    border-top: 10px solid var(--color-primary); /* Darker green separation line */
+}
+
+.process-banner h2 {
+    color: var(--color-text-dark);
+    font-size: 1.8rem;
+    max-width: 800px;
+    margin-bottom: 0;
+}
+
+/* --- MEDIA QUERIES FOR PROCESS PAGE LAYOUT --- */
+@media screen and (min-width: 768px) {
+    /* Switch process steps to a two-column layout */
+    .process-steps {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        padding: 0 10%;
+    }
+}
+
+
+/* --- PRICING PAGE STYLING (page3.html) --- */
+
+
+/* --- 3-Column Pricing Cards --- */
+/* Why: Uses CSS Grid for responsive 3-column layout on desktops. */
+.pricing-cards {
+    padding: 40px 5%;
+    display: grid;
+    grid-template-columns: 1fr; /* Stacked on mobile */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.price-card {
+    background-color: var(--color-card-bg); 
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+}
+
+.price-card.featured {
+    /* Highlight the featured plan with a subtle border or heavier shadow */
+    border: 3px solid var(--color-primary);
+    transform: scale(1.03);
+}
+
+.price-card h3 {
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+
+.price-card .price {
+    font-size: 3rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-dark-text);
+    margin: 10px 0 0;
+    line-height: 1;
+}
+
+.plan-duration {
+    color: var(--color-primary);
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+.plan-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+    text-align: left;
+}
+.plan-features li {
+    padding: 8px 0;
+    border-bottom: 1px dashed #e0e0e0;
+}
+
+
+/* --- FAQ Section --- */
+.faq-section {
+    padding: 60px 5%;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.faq-item {
+    background-color: var(--color-white);
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.faq-item h3 {
+    font-size: 1.1rem;
+    color: var(--color-text-dark);
+    margin-top: 0;
+}
+
+
+/* --- MEDIA QUERIES FOR PRICING PAGE LAYOUT --- */
+@media screen and (min-width: 768px) {
+    /* Switch pricing cards to a 3-column layout */
+    .pricing-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
