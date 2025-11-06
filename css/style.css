@@ -470,10 +470,6 @@ h2 {
     .hero-actions {
         justify-content: flex-start; /* Align buttons left to match text */
     }
-    
-    .customer-info {
-        text-align: left;
-    }
 }
 
 
